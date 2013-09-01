@@ -15,3 +15,4 @@ format: '%(karma).2f (auto) #4ji'
 #   language:     %(default_lang)s
 #   timezone:     %(timezone)s
 #
+log_dir: '~/tmp'
