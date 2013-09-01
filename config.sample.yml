@@ -1,0 +1,17 @@
+api:
+  consumer_key: 'REGISTER YOUR APP AND GET CONSUMER KEY/SEC HERE:'
+  consumer_sec: 'http://www.plurk.com/PlurkApp/register'
+  key: 'AND GET ACCESS TOKEN HERE:'
+  sec: 'http://www.plurk.com/OAuth/test/'
+format: '%(karma).2f (auto) #4ji'
+#
+# available format:
+#   karma:        %(karma).2f
+#   username:     %(nick_name)s
+#   screen name   %(display_name)s
+#   full name     %(full_name)s
+#   location:     %(location)s
+#   relationship: %(relationship)s
+#   language:     %(default_lang)s
+#   timezone:     %(timezone)s
+#

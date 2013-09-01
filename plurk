@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -n "$PYENV_ROOT" ]; then
+    PYTHON="$PYENV_ROOT/shims/python"
+else
+    PYTHON=python
+fi
+
+cd $(dirname "$0")
+
+CMD="cmd_$1.py"
+if [ ! -f "$CMD" ]; then
+    echo usage: $0 command [args...]
+    echo commands: $(ls cmd_*.py | sed -e 's/^cmd_\(.*\)\.py$/\1/')
+    exit 1
+fi
+
+shift
+$PYTHON $CMD "$@"
