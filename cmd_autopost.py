@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import logging
 from api import Api
+from util import abort
+import logging
 
 def do(config):
 
@@ -17,8 +18,7 @@ def do(config):
 if __name__ == '__main__':
     import sys
     if 2 <> len(sys.argv):
-        sys.stderr.write('usage: %s config.yml\n' % sys.argv[0])
-        sys.exit(1)
+        abort('usage: %s config.yml\n' % sys.argv[0])
 
     from config import load
     do(load(sys.argv[1]))
