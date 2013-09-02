@@ -5,3 +5,4 @@ Requirement
 
 * PyYAML
 * oauth2
+* Jinja2 (for emos_html)
