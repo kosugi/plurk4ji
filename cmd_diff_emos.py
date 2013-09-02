@@ -7,20 +7,15 @@ from functools import reduce
 from json import loads
 from operator import add
 from os.path import isdir, expanduser
-from util import abort, send_mail, paste
+from util import abort, send_mail, paste, obtain_latest_emos_content
 import codecs
 import os
 import urllib2
 
-EMOS_URL = 'http://www.plurk.com/API/Emoticons/get?api_key='
 PREV_FILENAME = 'prev.json'
 
 def extract_emo_keys(json):
     return set([x for x, y in reduce(add, json['karma'].values(), [])])
-
-def obtain_latest_content():
-    with closing(urllib2.urlopen(EMOS_URL)) as f:
-        return f.read()
 
 def load_saved_content(log_dir):
     try:
@@ -55,7 +50,7 @@ def do(config):
     if not (isdir(log_dir) and os.access(log_dir, os.W_OK)):
         abort('bad config.log_dir: ' + log_dir)
 
-    content_curr = obtain_latest_content()
+    content_curr = obtain_latest_emos_content()
     content_prev = load_saved_content(log_dir)
     if not content_prev:
         save_content(log_dir, content_curr)

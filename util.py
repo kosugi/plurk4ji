@@ -8,6 +8,11 @@ import sys
 import urllib
 import urllib2
 
+EMOS_URL = 'http://www.plurk.com/API/Emoticons/get?api_key='
+def obtain_latest_emos_content():
+    with closing(urllib2.urlopen(EMOS_URL)) as f:
+        return f.read()
+
 def abort(msg):
     sys.stderr.write(msg)
     sys.stderr.write('\n')
