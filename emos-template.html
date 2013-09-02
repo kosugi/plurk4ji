@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html><head><style>
+  table { border-collapse: collapse; }
+  th, td { border: solid 1px #666; padding: 3px; font-family: monospace; }
+  th { background-color: #CCC; }
+  pre { margin: 20px; padding: 6px; border: 1px solid #000; background-color: #DDD; }
+  h2 { border: 0px #999 solid; border-top-width: 3px; }
+  .num { text-align: right; padding-right: 0.5em; }
+</style>
+<meta charset="UTF-8" />
+<title>Available Plurk Emoticons</title></head><body>
+<h1>Available Plurk Emoticons</h1>
+<p>API が返す有効アイコン一覧 ({{ now }} 時点).</p>
+
+{% for nameby in emos.keys()|sort %}
+<h2>by {{ nameby }}</h2>
+<table>
+  <thead><tr><th>value</th><th>notation</th><th>icon</th></tr></thead>
+  <tbody>
+    {% for key in emos[nameby].keys()|map('int')|sort %}
+    {% for notation, url in emos[nameby][key|string] %}
+    <tr><td class="num">{{ key }}</td><td>{{ notation }}</td><td><img src="{{ url }}" /></td></tr>
+    {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
+{% endfor %}
+</body></html>
+{% endautoescape %}

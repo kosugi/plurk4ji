@@ -16,3 +16,4 @@ format: '%(karma).2f (auto) #4ji'
 #   timezone:     %(timezone)s
 #
 log_dir: '~/tmp'
+emos_html: 'PATH TO HTML-FILE (FOR emos_html COMMAND)'
