@@ -8,7 +8,7 @@ import traceback
 
 class Api(object):
 
-    BASE = 'http://www.plurk.com/APP'
+    BASE = 'https://www.plurk.com/APP'
 
     def __init__(self, config):
         self.consumer = Consumer(config['consumer_key'], config['consumer_sec'])
