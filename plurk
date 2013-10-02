@@ -10,7 +10,7 @@ cd $(dirname "$0")
 
 CMD="cmd_$1.py"
 if [ ! -f "$CMD" ]; then
-    echo usage: $0 command [args...]
+    echo usage: $0 command '[args...]'
     echo commands: $(ls cmd_*.py | sed -e 's/^cmd_\(.*\)\.py$/\1/')
     exit 1
 fi
