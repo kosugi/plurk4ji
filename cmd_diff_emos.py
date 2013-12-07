@@ -33,12 +33,12 @@ def do_post(config, added, deled):
     api = Api(config['api'])
     desc = u''
     if added:
-        desc += u'\n'.join(added) + u'\nが増えました\n(カルマの状態によっては使えない場合があります)\n\n'
+        desc += u'\n'.join(sorted(added)) + u'\nが増えました\n(カルマの状態によっては使えない場合があります)\n\n'
     if deled:
-        desc += u'\n'.join(deled) + u'\nが減りました\n\n'
+        desc += u'\n'.join(sorted(deled)) + u'\nが減りました\n\n'
     if desc:
         url = paste(desc)
-        text = u' '.join([u' '.join(added), u':', url, u'(details...)'])
+        text = u' '.join([u' '.join(sorted(added)), u':', url, u'(details...)'])
         params = dict(content=text.encode('UTF-8'), qualifier=':')
         ok, status, data = api.post('/Timeline/plurkAdd', params)
         if not ok:
