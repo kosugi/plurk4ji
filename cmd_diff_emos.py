@@ -4,7 +4,7 @@ from api import Api
 from contextlib import closing
 from datetime import datetime
 from functools import reduce
-from json import loads
+from json import loads, dumps
 from operator import add
 from os.path import isdir, expanduser
 from util import abort, send_mail, paste, obtain_latest_emos_content
@@ -20,14 +20,14 @@ def extract_emo_keys(json):
 def load_saved_content(log_dir):
     try:
         with codecs.open(log_dir + '/' + PREV_FILENAME, 'r', 'UTF-8') as f:
-            return f.read()
+            return loads(f.read())
     except IOError:
         pass
 
 def save_content(log_dir, content):
     for name in (PREV_FILENAME, datetime.now().strftime('%Y%m%d-%H%M.json')):
         with codecs.open(log_dir + '/' + name, 'w', 'UTF-8') as f:
-            f.write(content)
+            f.write(dumps(content))
 
 def do_post(config, added, deled):
     api = Api(config['api'])
@@ -50,14 +50,14 @@ def do(config):
     if not (isdir(log_dir) and os.access(log_dir, os.W_OK)):
         abort('bad config.log_dir: ' + log_dir)
 
-    content_curr = obtain_latest_emos_content()
+    content_curr = obtain_latest_emos_content(config)
     content_prev = load_saved_content(log_dir)
     if not content_prev:
         save_content(log_dir, content_curr)
         return
 
-    emos_curr = extract_emo_keys(loads(content_curr))
-    emos_prev = extract_emo_keys(loads(content_prev))
+    emos_curr = extract_emo_keys(content_curr)
+    emos_prev = extract_emo_keys(content_prev)
 
     added = emos_curr - emos_prev
     deled = emos_prev - emos_curr

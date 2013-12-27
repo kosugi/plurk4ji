@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from api import Api
 from contextlib import closing
 from email.Utils import formatdate
 from email.mime.text import MIMEText
@@ -8,10 +9,10 @@ import sys
 import urllib
 import urllib2
 
-EMOS_URL = 'http://www.plurk.com/API/Emoticons/get?api_key='
-def obtain_latest_emos_content():
-    with closing(urllib2.urlopen(EMOS_URL)) as f:
-        return f.read()
+def obtain_latest_emos_content(config):
+    api = Api(config['api'])
+    ok, status, data = api.post('/Emoticons/get')
+    return data
 
 def abort(msg):
     sys.stderr.write(msg)
