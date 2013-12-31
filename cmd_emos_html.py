@@ -10,8 +10,10 @@ import codecs
 BASE = dirname(__file__) or '.'
 
 def do(config):
-    emos = loads(obtain_latest_emos_content())
-    del emos['custom']
+    emos = obtain_latest_emos_content(config)
+    for key in ('custom', 'recuited'):
+        if key in emos:
+            del emos[key]
 
     env = Environment(loader=FileSystemLoader(BASE), extensions=['jinja2.ext.autoescape'])
     template = env.get_template('emos-template.html')
