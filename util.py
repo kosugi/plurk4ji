@@ -120,3 +120,34 @@ def paste(text, language='text'):
     postdata = dict(code=text.encode('UTF-8'), language=language.encode('UTF-8'))
     with closing(urllib2.urlopen('http://paste.plurk.com/', urllib.urlencode(postdata))) as res:
         return res.geturl()
+
+class Balancer(object):
+
+    def __init__(self, s=None):
+        if s is None:
+            s = u'(){}[]<>（）〔〕［］｛｝〈〉《》「」『』【】＜＞≪≫≦≧∈∋⊆⊇⊂⊃'
+        if len(s) % 2:
+            raise Exception('length of the first parameter of constructor should be even.')
+
+        self.pair_map = {}
+        try:
+            i = iter(s)
+            while True:
+                lhs = i.next()
+                rhs = i.next()
+                self.pair_map[lhs] = rhs
+                self.pair_map[rhs] = lhs
+        except StopIteration:
+            pass
+
+        self.clear()
+
+    def clear(self):
+        self.c = u''
+
+    def read(self, s):
+        for c in s:
+            self.c += self.pair_map.get(c) or u''
+
+    def complement(self):
+        return self.c[::-1]
