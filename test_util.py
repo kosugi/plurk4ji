@@ -21,15 +21,16 @@ class TestUtil(unittest.TestCase):
         self.balancer.clear()
         for x in xs:
             self.balancer.read(x)
-        self.assertEqual(y, self.balancer.complement())
+        self.assertEqual(y, self.balancer.complement)
 
     def test_balance(self):
-        self.t([''], '')
-        self.t(['a'], '')
-        self.t([')'], '(')
-        self.t(['('], ')')
-        self.t(['(()'], '())')
-        self.t(['(', '{'], '})')
+        self.t([u''], u'')
+        self.t([u'a'], u'')
+        self.t([u')'], u'(')
+        self.t([u'('], u')')
+        self.t([u'(()'], u')')
+        self.t([u'(', '{'], u'})')
+        self.t([u'（⊇)⊆⊂'], u'⊃(）')
 
 if __name__ == '__main__':
     unittest.main()

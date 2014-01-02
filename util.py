@@ -148,11 +148,14 @@ class Balancer(object):
         self.clear()
 
     def clear(self):
-        self.c = u''
+        self.complement = u''
 
     def read(self, s):
         for c in s:
-            self.c += self.pair_map.get(c) or u''
-
-    def complement(self):
-        return self.c[::-1]
+            d = self.pair_map.get(c)
+            if d is not None:
+                i = self.complement.find(c)
+                if 0 <= i:
+                    self.complement = self.complement[0:i] + self.complement[i+1:]
+                else:
+                    self.complement = d + self.complement
