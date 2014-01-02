@@ -5,6 +5,7 @@ from contextlib import closing
 from email.Utils import formatdate
 from email.mime.text import MIMEText
 from smtplib import SMTP
+import re
 import sys
 import urllib
 import urllib2
@@ -120,6 +121,10 @@ def paste(text, language='text'):
     postdata = dict(code=text.encode('UTF-8'), language=language.encode('UTF-8'))
     with closing(urllib2.urlopen('http://paste.plurk.com/', urllib.urlencode(postdata))) as res:
         return res.geturl()
+
+re_strip_tags = re.compile(ur'<[^>]*?>')
+def strip_tags(s):
+    return re_strip_tags.sub('', s)
 
 class Balancer(object):
 

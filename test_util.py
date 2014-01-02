@@ -5,8 +5,17 @@ import unittest
 import util
 
 class TestUtil(unittest.TestCase):
+
     def setUp(self):
         self.balancer = util.Balancer()
+
+    def test_strip_tags(self):
+        self.assertEqual('', util.strip_tags(''))
+        self.assertEqual('ac', util.strip_tags('a<b>c'))
+        self.assertEqual('a<b', util.strip_tags('a<b'))
+        self.assertEqual('a>b', util.strip_tags('a>b'))
+        self.assertEqual('ace', util.strip_tags('a<b>c<d>e'))
+        self.assertEqual('>ace<', util.strip_tags('>a<b>c<d>e<'))
 
     def t(self, xs, y):
         self.balancer.clear()
