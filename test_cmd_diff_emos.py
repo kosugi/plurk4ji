@@ -21,7 +21,7 @@ class TestCmdDiffEmos(unittest.TestCase):
     def test_do_post(self):
         pasteMock = PasteMock()
         cmd_diff_emos.paste = pasteMock
-        cmd_diff_emos.Api = ApiMock()
+        cmd_diff_emos.Api = ApiMock
         cmd_diff_emos.do_post(dict(api=0), set(["9", "14", "3"]), set(["8", "29", "4"]))
         self.assertEqual(u'''14\n3\n9\nが増えました\n(カルマの状態によっては使えない場合があります)\n\n29\n4\n8\nが減りました\n\n''', pasteMock.desc)
 
