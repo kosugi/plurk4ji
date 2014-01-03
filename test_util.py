@@ -31,6 +31,3 @@ class TestUtil(unittest.TestCase):
         self.t([u'(()'], u')')
         self.t([u'(', '{'], u'})')
         self.t([u'（⊇)⊆⊂'], u'⊃(）')
-
-if __name__ == '__main__':
-    unittest.main()
