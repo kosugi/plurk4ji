@@ -130,7 +130,7 @@ class Balancer(object):
 
     def __init__(self, s=None):
         if s is None:
-            s = u'(){}[]<>（）〔〕［］｛｝〈〉《》「」『』【】＜＞≪≫≦≧∈∋⊆⊇⊂⊃'
+            s = u'(){}[]｢｣<>（）〔〕［］｛｝〈〉《》「」『』【】＜＞≪≫≦≧∈∋⊆⊇⊂⊃'
         if len(s) % 2:
             raise Exception('length of the first parameter of constructor should be even.')
 

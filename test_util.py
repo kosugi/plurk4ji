@@ -31,3 +31,5 @@ class TestUtil(unittest.TestCase):
         self.t([u'(()'], u')')
         self.t([u'(', '{'], u'})')
         self.t([u'（⊇)⊆⊂'], u'⊃(）')
+        self.t([u'｢'], u'｣')
+        self.t([u'｣'], u'｢')
