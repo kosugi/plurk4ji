@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from api import Api
+from time import sleep
 from util import abort, strip_tags, Balancer
 import logging
 
@@ -44,6 +45,7 @@ def do(config):
         logging.error(data)
         return
 
+    interval = config.get('interval', 1)
     balancer = Balancer()
     for rec in data.get('plurks', []):
         if is_god_reading_fortune(rec):
@@ -74,6 +76,7 @@ def do(config):
                         logging.error('status: %s' % status)
                         logging.error(data)
                     return
+                    sleep(interval)
 
 if __name__ == '__main__':
     import sys
