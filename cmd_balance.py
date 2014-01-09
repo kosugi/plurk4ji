@@ -59,7 +59,7 @@ def do(config):
                 logging.error('''api.post('/Responses/get', dict(plurk_id=%s))''' % plurk_id)
                 logging.error('status: %s' % status)
                 logging.error(data)
-                return
+                continue
             for rec in data.get('responses', []):
                 content = rec.get('content', u'')
                 do_post(balancer, content)
@@ -75,7 +75,7 @@ def do(config):
                         logging.error('''api.post('/Responses/responseAdd', dict(content=%s))''' % complement)
                         logging.error('status: %s' % status)
                         logging.error(data)
-                    return
+                        break
                     sleep(interval)
 
 if __name__ == '__main__':
