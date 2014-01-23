@@ -118,9 +118,14 @@ def send_mail(config, subject, body):
 #   yaml: YAML
 #
 def paste(text, language='text'):
-    postdata = dict(code=text.encode('UTF-8'), language=language.encode('UTF-8'))
-    with closing(urllib2.urlopen('http://paste.plurk.com/', urllib.urlencode(postdata))) as res:
-        return res.geturl()
+    postdata = dict(code=text.encode('UTF-8'), language=language.encode('UTF-8'), webpage='')
+    req = urllib2.Request('http://paste.plurk.com/')
+    req.add_header('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36')
+    try:
+        with closing(urllib2.urlopen(req, urllib.urlencode(postdata))) as res:
+            return res.geturl()
+    except urllib2.HTTPError:
+        return ''
 
 re_strip_tags = re.compile(ur'<[^>]*?>')
 def strip_tags(s):
